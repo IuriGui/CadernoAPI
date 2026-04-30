@@ -6,6 +6,8 @@ import lombok.AllArgsConstructor;
 import org.antlr.v4.runtime.misc.LogManager;
 import org.springframework.stereotype.Service;
 import org.ufsm.cadernocampoapi.dto.PropriedadeRequestDTO;
+import org.ufsm.cadernocampoapi.dto.PropriedadeResponseDTO;
+import org.ufsm.cadernocampoapi.mapper.PropriedadeMapper;
 import org.ufsm.cadernocampoapi.model.Produtor;
 import org.ufsm.cadernocampoapi.model.ProdutorPropriedade;
 import org.ufsm.cadernocampoapi.model.Propriedade;
@@ -20,10 +22,11 @@ public class PropriedadeService {
 
     private final ProdutorRepository produtorRepository;
     private final PropriedadeRepository propriedadeRepository;
+    private final PropriedadeMapper  propriedadeMapper;
 
 
     @Transactional
-    public void criarPropriedade(PropriedadeRequestDTO propriedadeRequestDTO) {
+    public PropriedadeResponseDTO criarPropriedade(PropriedadeRequestDTO propriedadeRequestDTO) {
 
         Propriedade prop = Propriedade.builder()
                 .nome(propriedadeRequestDTO.getNome())
@@ -45,7 +48,8 @@ public class PropriedadeService {
         relacao.setPapel("PROPRIETARIO");
         prop.setProdutores(List.of(relacao));
 
-        propriedadeRepository.save(prop);
+        Propriedade p = propriedadeRepository.save(prop);
+        return propriedadeMapper.toDto(p);
     }
 
 

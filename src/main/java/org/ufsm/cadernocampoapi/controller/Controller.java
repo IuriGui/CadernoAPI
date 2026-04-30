@@ -9,7 +9,7 @@ import org.ufsm.cadernocampoapi.service.UsuarioService;
 import java.util.List;
 
 @RestController
-@RequestMapping("/testes")
+@RequestMapping("/usuario")
 @AllArgsConstructor
 public class Controller {
 
@@ -17,7 +17,7 @@ public class Controller {
     private final UsuarioService usuarioService;
 
 
-    @PostMapping("/generic")
+    @PostMapping("/cadastrar")
     public void testeCadastro(@RequestBody UsuarioRequestDTO usuarioRequestDTO) {
 
         usuarioService.registerUsuario(usuarioRequestDTO);
