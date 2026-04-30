@@ -22,17 +22,23 @@ public class Propriedade {
 
     @Column(nullable = false)
     private String nome;
-    private String observacao;
+
     @Column(nullable = false)
     private String cep;
+
     @Column(nullable = false)
     private String cidade;
+
     @Column(nullable = false)
     private String estado;
+
     @Column(nullable = false)
     private Double areaTotal;
+
     @Column(nullable = false)
     private Double areaPropria;
+
+    private String observacao;
     private Double areaArrendada;
     private Double areaProducaoVegetal;
 
