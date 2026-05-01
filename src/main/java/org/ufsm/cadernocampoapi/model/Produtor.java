@@ -36,7 +36,7 @@ public class Produtor {
     private List<ProgramaComercializacao> programaComercializacao;
 
 
-    @OneToMany(mappedBy = "produtor")
+    @OneToMany(mappedBy = "produtor", cascade = CascadeType.ALL)
     private List<ProdutorPropriedade> propriedade;
 
 

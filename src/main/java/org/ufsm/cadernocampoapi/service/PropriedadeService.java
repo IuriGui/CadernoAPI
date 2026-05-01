@@ -13,6 +13,7 @@ import org.ufsm.cadernocampoapi.model.ProdutorPropriedade;
 import org.ufsm.cadernocampoapi.model.Propriedade;
 import org.ufsm.cadernocampoapi.repositories.ProdutorRepository;
 import org.ufsm.cadernocampoapi.repositories.PropriedadeRepository;
+import org.ufsm.cadernocampoapi.repositories.UsuarioRepository;
 
 import java.util.List;
 
@@ -22,7 +23,8 @@ public class PropriedadeService {
 
     private final ProdutorRepository produtorRepository;
     private final PropriedadeRepository propriedadeRepository;
-    private final PropriedadeMapper  propriedadeMapper;
+    private final PropriedadeMapper propriedadeMapper;
+    private final UsuarioRepository usuarioRepository;
 
 
     @Transactional
@@ -39,6 +41,8 @@ public class PropriedadeService {
                 .areaProducaoVegetal(propriedadeRequestDTO.getAreaProducaoVegetal())
                 .build();
 
+
+        // Fixo no momento de teste
         Produtor produtor = produtorRepository.findById(5L)
                 .orElseThrow(() -> new RuntimeException("Produtor não encontrado"));
 
@@ -46,12 +50,30 @@ public class PropriedadeService {
         relacao.setPropriedade(prop);
         relacao.setProdutor(produtor);
         relacao.setPapel("PROPRIETARIO");
+
         prop.setProdutores(List.of(relacao));
 
-        Propriedade p = propriedadeRepository.save(prop);
-        return propriedadeMapper.toDto(p);
+        return propriedadeMapper
+                .toDto(propriedadeRepository.save(prop));
     }
 
+
+    public void compartilharAcesso(Long propriedadeId, String email){
+
+/*
+            1. Verifica se está cadastrado
+            2. Procura a entidade 'produtor' do usuário
+
+**/
+
+        Long userId = usuarioRepository.findByEmail(email)
+                .orElseThrow()
+                .getId();
+
+        produtorRepository.findByUsuarioId(userId);
+
+
+    }
 
 
 

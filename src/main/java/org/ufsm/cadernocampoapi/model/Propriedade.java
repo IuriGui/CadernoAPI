@@ -48,8 +48,8 @@ public class Propriedade {
     @OneToMany(mappedBy = "propriedade")
     private List<Local> locais;
 
-    @Column(nullable = false)
-    @OneToMany(mappedBy = "propriedade")
+//    @Column(nullable = false)
+    @OneToMany(mappedBy = "propriedade", cascade = CascadeType.ALL )
     private List<ProdutorPropriedade> produtores;
 
 
