@@ -116,4 +116,10 @@ class PropriedadeServiceTest {
 
     }
 
+    @Test
+    void deveRetornarUsuarioDoProdutor(){
+        System.out.println(
+                produtorRepository.findByUsuarioEmail("iuri@email.com")
+        );
+    }
 }
