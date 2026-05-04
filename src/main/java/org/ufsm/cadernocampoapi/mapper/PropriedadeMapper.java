@@ -15,4 +15,5 @@ public interface PropriedadeMapper {
     PropriedadeResponseDTO toDto(Propriedade propriedade);
 
 
+
 }
