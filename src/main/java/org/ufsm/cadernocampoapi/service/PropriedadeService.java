@@ -5,17 +5,21 @@ import jakarta.transaction.Transactional;
 import lombok.AllArgsConstructor;
 import org.antlr.v4.runtime.misc.LogManager;
 import org.springframework.stereotype.Service;
+import org.ufsm.cadernocampoapi.dto.CompartilharAcessoDTO;
 import org.ufsm.cadernocampoapi.dto.PropriedadeRequestDTO;
 import org.ufsm.cadernocampoapi.dto.PropriedadeResponseDTO;
 import org.ufsm.cadernocampoapi.mapper.PropriedadeMapper;
+import org.ufsm.cadernocampoapi.model.NivelAcesso;
 import org.ufsm.cadernocampoapi.model.Produtor;
 import org.ufsm.cadernocampoapi.model.ProdutorPropriedade;
 import org.ufsm.cadernocampoapi.model.Propriedade;
+import org.ufsm.cadernocampoapi.repositories.ProdutorPropriedadeRepository;
 import org.ufsm.cadernocampoapi.repositories.ProdutorRepository;
 import org.ufsm.cadernocampoapi.repositories.PropriedadeRepository;
 import org.ufsm.cadernocampoapi.repositories.UsuarioRepository;
 
 import java.util.List;
+import java.util.Optional;
 
 @Service
 @AllArgsConstructor
@@ -25,6 +29,7 @@ public class PropriedadeService {
     private final PropriedadeRepository propriedadeRepository;
     private final PropriedadeMapper propriedadeMapper;
     private final UsuarioRepository usuarioRepository;
+    private final ProdutorPropriedadeRepository produtorPropriedadeRepository;
 
 
     @Transactional
@@ -43,7 +48,7 @@ public class PropriedadeService {
 
 
         // Fixo no momento de teste
-        Produtor produtor = produtorRepository.findById(5L)
+        Produtor produtor = produtorRepository.findById(1L)
                 .orElseThrow(() -> new RuntimeException("Produtor não encontrado"));
 
         ProdutorPropriedade relacao = new ProdutorPropriedade();
@@ -58,19 +63,32 @@ public class PropriedadeService {
     }
 
 
-    public void compartilharAcesso(Long propriedadeId, String email){
+    public void compartilharAcesso(Long propriedadeId, CompartilharAcessoDTO dto){
 
 /*
-            1. Verifica se está cadastrado
-            2. Procura a entidade 'produtor' do usuário
+            1. Procura o produtor pelo email
+            2. Procura a propriedade
+*/
 
-**/
+        // Achar produtor
+        Optional<Produtor> produtor = produtorRepository.findByUsuarioEmail(dto.emailUsuario());
+        if(produtor.isEmpty()) {
+            throw new RuntimeException("Produtor não encontrado");
+        }
+        Optional<Propriedade> propriedade = propriedadeRepository.findById(propriedadeId);
+        if(propriedade.isEmpty()){
+            throw new RuntimeException();
+        }
+        ProdutorPropriedade relacionamento = new ProdutorPropriedade();
+        relacionamento.setProdutor(produtor.get());
+        relacionamento.setPropriedade(propriedade.get());
+        relacionamento.setPapel(NivelAcesso.COLABORADOR.toString());
 
-        Long userId = usuarioRepository.findByEmail(email)
-                .orElseThrow()
-                .getId();
+        produtorPropriedadeRepository.save(relacionamento);
 
-        produtorRepository.findByUsuarioId(userId);
+
+
+
 
 
     }
