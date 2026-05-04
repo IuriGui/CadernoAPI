@@ -87,12 +87,10 @@ public class PropriedadeService {
         produtorPropriedadeRepository.save(relacionamento);
 
 
-
-
-
-
     }
 
-
+    
+    //Editar
+    //Deletar
 
 }
