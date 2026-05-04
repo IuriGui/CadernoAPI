@@ -1,10 +1,12 @@
 package org.ufsm.cadernocampoapi.model;
 
 import jakarta.persistence.*;
+import lombok.Getter;
 
 import java.util.Date;
 
 @Entity
+@Getter
 public class Insumo {
 
     @Id

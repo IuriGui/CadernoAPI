@@ -2,8 +2,10 @@ package org.ufsm.cadernocampoapi.model;
 
 
 import jakarta.persistence.*;
+import lombok.Getter;
 
 @Entity
+@Getter
 public class Cultura {
 
     @Id
