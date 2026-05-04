@@ -1,6 +1,8 @@
 package org.ufsm.cadernocampoapi.dto;
 
+import jakarta.validation.constraints.NotBlank;
+
 public record AreaCultivoRequestDTO(
-        String nome
+       @NotBlank String nome
 ) {
 }

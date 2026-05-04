@@ -20,7 +20,9 @@ public class Local {
 
     @Column(nullable = false)
     private String nome;
+
     @Column(nullable = false)
+    @Enumerated(EnumType.STRING)
     private TipoLocalEnum tipo;
 
     @Column(nullable = false)
@@ -43,7 +45,17 @@ public class Local {
     @OneToMany(mappedBy = "local")
     private List<AreaCultivo> areasCultivo;
 
-
-
-
+    @Override
+    public String toString() {
+        return "Local{" +
+                "id=" + id +
+                ", nome='" + nome + '\'' +
+                ", tipo=" + tipo +
+                ", areaEmMetros=" + areaEmMetros +
+                ", quebraVento=" + quebraVento +
+                ", areaSensivel=" + areaSensivel +
+                ", observacoes='" + observacoes + '\'' +
+                ", areasCultivo=" + areasCultivo +
+                '}';
+    }
 }

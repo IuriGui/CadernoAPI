@@ -1,15 +1,19 @@
 package org.ufsm.cadernocampoapi;
 
+import jakarta.persistence.EntityNotFoundException;
+import jakarta.validation.Valid;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
+import org.springframework.http.ResponseEntity;
 import org.springframework.transaction.annotation.Transactional;
+import org.springframework.web.bind.annotation.PathVariable;
+import org.springframework.web.bind.annotation.RequestBody;
+import org.ufsm.cadernocampoapi.dto.AreaCultivoRequestDTO;
+import org.ufsm.cadernocampoapi.dto.AreaCultivoResponseDTO;
 import org.ufsm.cadernocampoapi.dto.PropriedadeRequestDTO;
 import org.ufsm.cadernocampoapi.mapper.PropriedadeMapper;
-import org.ufsm.cadernocampoapi.model.Produtor;
-import org.ufsm.cadernocampoapi.model.ProdutorPropriedade;
-import org.ufsm.cadernocampoapi.model.Propriedade;
-import org.ufsm.cadernocampoapi.model.Usuario;
+import org.ufsm.cadernocampoapi.model.*;
 import org.ufsm.cadernocampoapi.repositories.ProdutorRepository;
 import org.ufsm.cadernocampoapi.repositories.PropriedadeRepository;
 import org.ufsm.cadernocampoapi.repositories.UsuarioRepository;
@@ -116,10 +120,5 @@ class PropriedadeServiceTest {
 
     }
 
-    @Test
-    void deveRetornarUsuarioDoProdutor(){
-        System.out.println(
-                produtorRepository.findByUsuarioEmail("iuri@email.com")
-        );
-    }
+
 }

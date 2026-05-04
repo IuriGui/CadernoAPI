@@ -1,17 +1,20 @@
 package org.ufsm.cadernocampoapi.model;
 
 import jakarta.persistence.*;
+import lombok.Setter;
 
 import java.util.List;
 
 
 @Entity
-public class AreaCultivo {
+@Setter
+public class  AreaCultivo {
 
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
+
     @Column(nullable = false)
     private String nome;
 
