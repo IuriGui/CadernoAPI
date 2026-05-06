@@ -12,7 +12,8 @@ public interface PropriedadeMapper {
 
     Propriedade toEntity(PropriedadeRequestDTO dto);
 
-    PropriedadeResponseDTO toDto(Propriedade dto);
+    PropriedadeResponseDTO toDto(Propriedade propriedade);
+
 
 
 }

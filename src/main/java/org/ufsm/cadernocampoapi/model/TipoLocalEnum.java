@@ -6,5 +6,6 @@ public enum TipoLocalEnum {
     POMAR,
     HIDROPONIA,
     VIVERO,
+    CANTEIRO,
     OUTRO
 }

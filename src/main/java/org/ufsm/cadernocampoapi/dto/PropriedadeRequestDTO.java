@@ -21,10 +21,9 @@ public class PropriedadeRequestDTO {
     @Size(min = 2, max = 2, message = "Use as siglas dos estados")
     private String estado;
 
-    @NotBlank(message = "A área total da propriedade deve ser informada")
+//    @NotBlank(message = "A área total da propriedade deve ser informada")
     private Double areaTotal;
 
-    @NotBlank(message = "Você deve informar a sua área própria")
     private Double areaPropria;
 
     private Double areaArrendada;

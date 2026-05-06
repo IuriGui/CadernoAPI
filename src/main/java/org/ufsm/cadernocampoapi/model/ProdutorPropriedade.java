@@ -25,4 +25,6 @@ public class ProdutorPropriedade {
     @Column(nullable = false)
     private String papel;
 
+
+
 }
