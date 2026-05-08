@@ -23,7 +23,8 @@ public class ProdutorPropriedade {
     private Produtor produtor;
 
     @Column(nullable = false)
-    private String papel;
+    @Enumerated(EnumType.STRING)
+    private NivelAcesso papel;
 
 
 
