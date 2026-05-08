@@ -2,6 +2,7 @@ package org.ufsm.cadernocampoapi.service;
 
 
 import jakarta.transaction.Transactional;
+import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 import org.ufsm.cadernocampoapi.dto.UsuarioRequestDTO;
 import org.ufsm.cadernocampoapi.dto.UsuarioResponseDTO;
@@ -20,11 +21,13 @@ public class UsuarioService {
     private final UsuarioRepository usuarioRepository;
     private final UsuarioMapper usuarioMapper;
     private final ProdutorRepository produtorRepository;
+    private final PasswordEncoder passwordEncoder;
 
-    public UsuarioService(UsuarioRepository usuarioRepository, UsuarioMapper usuarioMapper, ProdutorRepository produtorRepository) {
+    public UsuarioService(UsuarioRepository usuarioRepository, UsuarioMapper usuarioMapper, ProdutorRepository produtorRepository, PasswordEncoder passwordEncoder) {
         this.usuarioRepository = usuarioRepository;
         this.usuarioMapper = usuarioMapper;
         this.produtorRepository = produtorRepository;
+        this.passwordEncoder = passwordEncoder;
     }
 
     @Transactional
@@ -34,6 +37,8 @@ public class UsuarioService {
         Usuario usr = usuarioMapper.toEntity(usuarioRequestDTO);
         MecanismoControle mec = usuarioMapper.toEntity(usuarioRequestDTO.getMecanismo());
         List<ProgramaComercializacao> li = usuarioMapper.toEntityList(usuarioRequestDTO.getProgramaComercializacao());
+
+        usr.setPassword(passwordEncoder.encode(usr.getPassword()));
 
         // 2. Usando o Builder para montar o Produtor de forma elegante
         Produtor prd = Produtor.builder()

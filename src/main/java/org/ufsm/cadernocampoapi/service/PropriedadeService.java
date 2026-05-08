@@ -54,7 +54,7 @@ public class PropriedadeService {
         ProdutorPropriedade relacao = new ProdutorPropriedade();
         relacao.setPropriedade(prop);
         relacao.setProdutor(produtor);
-        relacao.setPapel("PROPRIETARIO");
+        relacao.setPapel(NivelAcesso.PROPRIETARIO);
 
         prop.setProdutores(List.of(relacao));
 
@@ -82,7 +82,7 @@ public class PropriedadeService {
         ProdutorPropriedade relacionamento = new ProdutorPropriedade();
         relacionamento.setProdutor(produtor.get());
         relacionamento.setPropriedade(propriedade.get());
-        relacionamento.setPapel(NivelAcesso.COLABORADOR.toString());
+        relacionamento.setPapel(NivelAcesso.COLABORADOR);
 
         produtorPropriedadeRepository.save(relacionamento);
 
