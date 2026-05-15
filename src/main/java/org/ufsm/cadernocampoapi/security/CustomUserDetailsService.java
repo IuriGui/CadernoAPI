@@ -1,7 +1,5 @@
 package org.ufsm.cadernocampoapi.security;
 
-
-import lombok.AllArgsConstructor;
 import lombok.RequiredArgsConstructor;
 import org.springframework.security.core.authority.SimpleGrantedAuthority;
 import org.springframework.security.core.userdetails.User;
@@ -28,8 +26,10 @@ public class CustomUserDetailsService implements UserDetailsService {
         return new User(
                 u.getEmail(),
                 u.getPassword(),
+                // pq eu coloquei isso aqui
                 List.of(new SimpleGrantedAuthority("ROLE_PRODUTOR"))
         );
 
     }
+
 }
